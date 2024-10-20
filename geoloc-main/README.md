@@ -22,7 +22,7 @@ This project is a simple web application built with Flask that allows users to r
 
 1. *Clone the repository:*
 ```
-   git clone https://github.com/this-izz-nandini/geoloc
+   git clone https://github.com/vasanti1705/geolocation.git
    cd geolocation-flask-app
 ```   
 
@@ -69,19 +69,19 @@ To run the application using Docker, following these steps:
 
 1. *Build the Docker image:*
 ```
-   docker build -t geolocation-flask-app .
+   docker build -t geolocation .
 ```   
 
 2. *Run the Docker container:*
 ```
-   docker run -p 5000:5000 --env-file .env geolocation-flask-app
+   docker run -p 5000:5000 --env-file .env geolocation
 ```
 OR use 
 ```
-   docker run -p 5000:5000 --env API_KEY=<api_key> geolocation-flask-app
+   docker run -p 5000:5000 --env API_KEY=<api_key> geolocation
 ```
 
 *Link to Docker image:*
 
-```  docker pull nandiiniij/geo-loc:latest ```
+```  docker pull vasanti1705/geolocation:latest ```
    
