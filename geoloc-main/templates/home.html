@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Location Information</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+<body>
+    <div class="container">
+        <div class="left-side">
+            <div class="header">
+                <h1>Location Information for IP Address {{ data.ip }}</h1>
+                <button><a href="{{ url_for('input_ip') }}">Search another IP</a></button>
+            </div>
+            <div class="info-card">
+                <table id="dataTable">
+                    <tr><th>Parameters</th><th>Description</th></tr>
+                    <tr><td><b>Country</b></td><td>{{ data.country_name }}</td></tr>
+                    <tr><td><b>State</b></td><td>{{ data.state_prov }}</td></tr>
+                    <tr><td><b>City</b></td><td>{{ data.city }}</td></tr>
+                    <tr><td><b>ZIP Code</b></td><td>{{ data.zipcode }}</td></tr>
+                    <tr><td><b>Current Time</b></td><td>{{ data.time_zone.current_time }}</td></tr>
+                    <tr><td><b>Time Zone</b></td><td>{{ data.time_zone.name }}</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="right-side">
+            <div id="map-container">
+                <img src="{{ data.country_flag }}" alt="Country Flag" class="flag">
+                <div id="map"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        const map = L.map('map').setView([{{ data.latitude }}, {{ data.longitude }}], 10);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+        }).addTo(map);
+
+        L.marker([{{ data.latitude }}, {{ data.longitude }}]).addTo(map)
+            .bindPopup("{{ data.latitude }}, {{ data.longitude }}")
+            .openPopup();
+    </script>
+
+</body>
+</html>
